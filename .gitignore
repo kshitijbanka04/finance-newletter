@@ -52,3 +52,5 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *.coveragerc
+
+.history/
