@@ -6,14 +6,6 @@ from exa_py import Exa
 
 class NewsAgent:
     def __init__(self, stock_name, sector_name, tavily_api_key=None, exa_api_key=None, fallback_api_key=None):
-        """
-        Initializes the NewsAgent with stock and sector information.
-        :param stock_name: Name of the stock/company.
-        :param sector_name: Name of the sector.
-        :param tavily_api_key: API key for Tavily.
-        :param exa_api_key: API key for Exa.
-        :param fallback_api_key: API key for fallback (e.g., newsapi.org).
-        """
         self.stock_name = stock_name
         self.sector_name = sector_name
         self.tavily_api_key = tavily_api_key

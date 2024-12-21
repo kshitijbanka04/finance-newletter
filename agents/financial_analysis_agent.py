@@ -51,7 +51,6 @@ class FinancialAnalysisAgent:
         return self.query_openai(prompt)
 
     def query_openai(self, prompt):
-        # Connect to OpenAI API
         client = OpenAI(api_key=self.api_key)
         try:
             response = client.chat.completions.create(
