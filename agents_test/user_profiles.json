@@ -1,0 +1,96 @@
+[   
+    {
+        "user_name": "Conservative Investor",
+        "user_age": 45,
+        "user_email": "conservative_investor@example.com",
+        "portfolio_risk": "Low",
+        "portfolio": {
+            "stocks": [
+                {"name": "Reliance Industries Ltd.", "sector": "Energy", "stock_code": "500325", "market_cap": "LARGE_CAP"},
+                {"name": "HDFC Bank", "sector": "Banking", "stock_code": "500180", "market_cap": "LARGE_CAP"},
+                {"name": "Infosys", "sector": "IT", "stock_code": "500209", "market_cap": "LARGE_CAP"},
+                {"name": "Asian Paints", "sector": "FMCG", "stock_code": "500820", "market_cap": "LARGE_CAP"}
+            ],
+            "mutual_funds": [
+                {"name": "HDFC Balanced Advantage Fund", "type": "Hybrid", "focus": "BALANCED_RISK"},
+                {"name": "ICICI Prudential Bluechip Fund", "type": "Equity", "focus": "LARGE_CAP"}
+            ]
+        }
+    },
+    {    
+        "user_name": "Growth-Oriented Investor",
+        "user_age": 38,
+        "user_email": "growth_investor@example.com",
+        "portfolio_risk": "Medium to High",
+        "portfolio": {
+            "stocks": [
+                {"name": "Tata Motors", "sector": "Automobile","stock_code": "500570", "market_cap": "MID_CAP"},
+                {"name": "Adani Enterprises", "sector": "Infrastructure","stock_code": "512599", "market_cap": "LARGE_CAP"},
+                {"name": "Coforge", "sector": "IT Services","stock_code": "532541", "market_cap": "MID_CAP"},
+                {"name": "Godrej Consumer Products", "sector": "FMCG","stock_code": "532424", "market_cap": "MID_CAP"},
+                {"name": "Laurus Labs", "sector": "Pharmaceuticals","stock_code": "540222", "market_cap": "MID_CAP"}
+            ],
+            "mutual_funds": [
+                {"name": "Axis Midcap Fund", "type": "Equity", "focus": "MID_CAP"},
+                {"name": "Nippon India Growth Fund", "type": "Equity", "focus": "MID_CAP"}
+            ]
+        }
+    },
+    {
+        "user_name": "Sector-Specific Enthusiast",
+        "user_age": 30,
+        "user_email": "sector_enthusiast@example.com",
+        "portfolio_risk": "High",
+        "portfolio": {
+            "stocks": [
+                {"name": "Tech Mahindra", "sector": "IT Services","stock_code": "532755", "market_cap": "LARGE_CAP"},
+                {"name": "Sun Pharma", "sector": "Pharmaceuticals","stock_code": "524715", "market_cap": "LARGE_CAP"},
+                {"name": "Divi's Laboratories", "sector": "Pharmaceuticals","stock_code": "532488", "market_cap": "LARGE_CAP"},
+                {"name": "Zydus Lifesciences", "sector": "Healthcare","stock_code": "532321", "market_cap": "MID_CAP"},
+                {"name": "L&T Technology Services", "sector": "Engineering R&D","stock_code": "540115", "market_cap": "MID_CAP"}
+            ],
+            "mutual_funds": [
+                {"name": "ICICI Prudential Technology Fund", "type": "Sectoral", "focus": "TECHNOLOGY"},
+                {"name": "Mirae Asset Healthcare Fund", "type": "Sectoral", "focus": "HEALTHCARE"}
+            ]
+        }
+    },
+    {
+        "user_name": "Small-Cap Focused Investor",
+        "user_age": 28,
+        "user_email": "small_cap_investor@example.com",
+        "portfolio_risk": "High",
+        "portfolio": {
+            "stocks": [
+                {"name": "Vaibhav Global", "sector": "Retail","stock_code": "532156", "market_cap": "SMALL_CAP"},
+                {"name": "Chemplast Sanmar", "sector": "Specialty Chemicals","stock_code": "543336","market_cap": "SMALL_CAP"},
+                {"name": "Route Mobile", "sector": "IT Services","stock_code": "543228", "market_cap": "SMALL_CAP"},
+                {"name": "Polycab India", "sector": "Electrical Equipment", "stock_code": "542652","market_cap": "SMALL_CAP"},
+                {"name": "Laxmi Organic Industries", "sector": "Chemicals", "stock_code": "543277","market_cap": "SMALL_CAP"}
+            ],
+            "mutual_funds": [
+                {"name": "SBI SMALL_CAP Fund", "type": "Equity", "focus": "SMALL_CAP"},
+                {"name": "HDFC SMALL_CAP Fund", "type": "Equity", "focus": "SMALL_CAP"}
+            ]
+        }
+    },
+    {
+        "user_name": "Diversified Investor",
+        "user_age": 35,
+        "user_email": "diversified_investor@example.com",
+        "portfolio_risk": "Medium",
+        "portfolio": {
+            "stocks": [
+                {"name": "Hindustan Unilever", "sector": "FMCG","stock_code": "500696", "market_cap": "LARGE_CAP"},
+                {"name": "ICICI Bank", "sector": "Banking","stock_code": "532174", "market_cap": "LARGE_CAP"},
+                {"name": "Bajaj Finance", "sector": "NBFC","stock_code": "500034", "market_cap": "LARGE_CAP"},
+                {"name": "Avenue Supermarts (DMart)", "sector": "Retail","stock_code": "540376", "market_cap": "MID_CAP"},
+                {"name": "Tata Power", "sector": "Utilities","stock_code": "500400", "market_cap": "MID_CAP"}
+            ],
+            "mutual_funds": [
+                {"name": "Kotak Standard Multicap Fund", "type": "Equity", "focus": "MULTICAP"},
+                {"name": "Aditya Birla Sun Life Equity Hybrid 95 Fund", "type": "Hybrid", "focus": "BALANCED_RISK"}
+            ]
+        }
+    }
+]

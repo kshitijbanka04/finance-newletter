@@ -1,0 +1,50 @@
+[
+    {
+        "file_name": "Financial Results for Q3 FY25",
+        "file_sub_category": "Financial Results",
+        "pdf_file_url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/f98c5e50-d238-401b-b29a-244d2d244815.pdf",
+        "publish_date": "2024-10-14T18:58:35.22",
+        "file_category": "Result",
+        "short_description": "Company reported 10% YoY growth in revenue with improved margins driven by FMCG performance."
+    },
+    {
+        "file_name": "Earnings Call Transcript Q3 FY25",
+        "file_sub_category": "Earnings Call Transcript",
+        "pdf_file_url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/0e6309fa-450f-4db6-88b2-d76d9a3ff756.pdf",
+        "publish_date": "2024-10-15T08:23:07.657",
+        "file_category": "Company Update",
+        "short_description": "Audio/video transcript highlighting management's 15% YoY growth expectation for FY25."
+    },
+    {
+        "file_name": "Limited Review Report H1 FY25",
+        "file_sub_category": "Limited Review Report",
+        "pdf_file_url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/1ce9e885-fc78-4477-9751-20eb014e9cc5.pdf",
+        "publish_date": "2024-12-13T20:11:04.647",
+        "file_category": "Company Update",
+        "short_description": "Review showed no material misstatements but highlighted a rise in contingent liabilities."
+    },
+    {
+        "file_name": "NAV Declaration Q3 FY25",
+        "file_sub_category": "Declaration of NAV",
+        "pdf_file_url": "https://www.bseindia.com/xml-data/corpfiling/AttachLive/be04f733-eaed-4f16-9797-b1ce97a2377b.pdf",
+        "publish_date": "2024-12-20T17:44:12.047",
+        "file_category": "Company Update",
+        "short_description": "Latest NAV declared, reflecting asset value adjustments for Q3 FY25."
+    },
+    {
+        "file_name": "AUM Disclosure November FY25",
+        "file_sub_category": "Monthly AUM Disclosure",
+        "pdf_file_url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/941b7ddd-fe93-4d28-af3e-8e3e96ee475c.pdf",
+        "publish_date": "2024-11-19T19:49:51.627",
+        "file_category": "Company Update",
+        "short_description": "November AUM shows 5% MoM growth led by strong inflows in equity funds."
+    },
+    {
+        "file_name": "Quarterly AUM Disclosure Q2 FY25",
+        "file_sub_category": "Quarterly AUM Disclosure",
+        "pdf_file_url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/baab7c63-8aa9-4d94-95c5-85b0d5a913bd.pdf",
+        "publish_date": "2024-11-18T23:19:42.377",
+        "file_category": "Company Update",
+        "short_description": "Quarterly AUM for Q2 reflects a 7% growth driven by debt fund inflows."
+    }
+]

@@ -31,6 +31,8 @@ env/
 .venv/
 .pyvenv/
 .pyenv/
+finance-newsletter-env
+.env
 
 # PyInstaller
 # Usually these files are written by a Python script from a template
