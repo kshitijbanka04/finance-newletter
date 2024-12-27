@@ -1,0 +1,76 @@
+[
+    {
+       "graph_type":"bar_chart",
+       "title":"HDFC Bank Revenue Growth Analysis",
+       "x_axis":{
+          "label":"Quarter/Year",
+          "data":[
+             "2023",
+             "2024-Q2",
+             "2024-Q3"
+          ]
+       },
+       "y_axis":{
+          "label":"Revenue (in Billion INR)",
+          "data":[
+             "2760",
+             "692.74",
+             "727.74"
+          ]
+       },
+       "additional_data":{
+          "Growth Rate (Quarterly)":[
+             "118.02%",
+             "63.02%"
+          ],
+          "Annual Revenue":[
+             "2290",
+             "2760"
+          ],
+          "Growth Rate (Annual)":[
+             "102.45%"
+          ]
+       },
+       "insights":"The bar chart shows the revenue growth of HDFC Bank, indicating significant growth rates in recent quarters. The annual figures provide a context for the quarterly performance."
+    },
+    {
+       "graph_type":"line_chart",
+       "title":"HDFC Bank Quarterly Earnings Per Share (EPS) Over Time",
+       "x_axis":{
+          "label":"Quarter/Year",
+          "data":[
+             "Q1 2023",
+             "Q2 2023",
+             "Q1 2024",
+             "Q2 2024"
+          ]
+       },
+       "y_axis":{
+          "label":"Earnings Per Share (EPS)",
+          "data":[
+             "9.15 INR",
+             "9.78 INR",
+             "10.24 INR",
+             "10.58 INR"
+          ]
+       },
+       "additional_data":{
+          "Earnings Per Share (EPS) for Q2 2023":"9.78 INR",
+          "Earnings Per Share (EPS) for Q2 2024":"10.58 INR"
+       },
+       "insights":"The line chart will depict the trend of EPS over the specified quarters, allowing investors to gauge performance improvement over time."
+    },
+    {
+       "graph_type":"pie_chart",
+       "title":"HDFC Bank Cash Reserves Distribution",
+       "labels":[
+          "Cash Reserves for 2023",
+          "Cash Reserves for 2024"
+       ],
+       "data":[
+          "2.17B INR",
+          "2.5B INR"
+       ],
+       "insights":"The pie chart will showcase the growth in cash reserves between the two years, highlighting the bank's improved liquidity position."
+    }
+ ]

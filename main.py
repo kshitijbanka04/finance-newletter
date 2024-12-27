@@ -8,6 +8,10 @@ from agents.newsletter_agent import NewsletterAgent
 from supabase import create_client
 from weasyprint import HTML
 
+from agents.visualizer_agent import StockVisualizer
+from utils.matlab_graph_util import generate_graphs_from_json
+from utils.upload_to_imgur import upload_graphs_to_imgur
+
 # Supabase credentials
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
@@ -18,6 +22,7 @@ API_KEYS = {
     "tavily": os.getenv("TAVILY_API_KEY"),
     "exa": os.getenv("EXA_API_KEY"),
     "fallback": os.getenv("NEWS_API_KEY"),
+    "imgur": os.getenv("IMGUR_CLIENT_ID")
 }
 
 # Initialize Supabase client
@@ -38,9 +43,10 @@ def fetch_stock_documents_supabase(stock_name, stock_code):
         print(f"Error fetching documents for stock {stock_name} from Supabase: {e}")
         return None
 
-def convert_text_to_html_and_pdf(user_name, text_file_path):
+
+def convert_text_to_html_and_pdf(user_name, text_file_path, graph_paths, client_id):
     """
-    Converts a text file to an HTML and then to a PDF.
+    Converts a text file to an HTML and then to a PDF with embedded graphs.
     """
     print(f"Converting text file to HTML and PDF for {user_name}...")
     try:
@@ -48,9 +54,12 @@ def convert_text_to_html_and_pdf(user_name, text_file_path):
         with open(text_file_path, "r") as file:
             text_content = file.read()
 
-        # Use the HTMLParserAgent to create visually appealing HTML
+        # Upload graphs to Imgur and get their public URLs
+        graph_urls = upload_graphs_to_imgur(graph_paths, client_id)
+
+        # Use the HTMLParserAgent to create visually appealing HTML with graphs
         html_parser = HTMLParserAgent(API_KEYS["openai"])
-        html_content = html_parser.generate_html(text_content)
+        html_content = html_parser.generate_html(text_content, graph_urls)
 
         # Save the HTML content to a file
         output_dir = "final_html_reports"
@@ -75,7 +84,8 @@ def convert_text_to_html_and_pdf(user_name, text_file_path):
 
 def process_stock(stock_name, stock_code, sector_name):
     """
-    Processes a single stock: fetches documents, categorizes them, and runs the SupervisorAgent.
+    Processes a single stock: fetches documents, categorizes them, runs the SupervisorAgent, 
+    and generates graph configurations using the Graph Agent.
     """
     print(f"Processing stock: {stock_name}...")
 
@@ -83,7 +93,7 @@ def process_stock(stock_name, stock_code, sector_name):
     documents = fetch_stock_documents_supabase(stock_name, stock_code)
     if not documents:
         print(f"No documents to process for {stock_name}")
-        return
+        return []
 
     # Categorize files
     file_categorizer = FileCategorizer(documents)
@@ -108,8 +118,28 @@ def process_stock(stock_name, stock_code, sector_name):
 
     print(f"Report saved for {stock_name} at {output_path}")
 
+    # Initialize and use the Graph Agent
+    try:
+        print(f"Generating graphs for {stock_name}...")
+        with open(output_path, "r") as file:
+            text_data = file.read()
 
-def generate_final_newsletter(user_profile):
+        graph_agent = StockVisualizer(api_key=API_KEYS["openai"], tavily_api_key=API_KEYS["tavily"])
+        graph_configs = graph_agent.generate_final_config(text_data, stock_name)
+
+        if graph_configs:
+            return generate_graphs_from_json(graph_configs, stock_name)
+        else:
+            print(f"No graph data available for {stock_name}")
+            return []
+
+    except Exception as e:
+        print(f"Error generating graphs for {stock_name}: {e}")
+        return []
+
+
+
+def generate_final_newsletter(user_profile, graph_paths):
     """
     Generates a newsletter for the entire user portfolio.
     """
@@ -147,9 +177,10 @@ def generate_final_newsletter(user_profile):
     print(f"Final newsletter saved at: {output_path}")
 
     # Convert the text file to an HTML and PDF
-    pdf_file_path = convert_text_to_html_and_pdf(user_profile["user_name"], output_path)
+    pdf_file_path = convert_text_to_html_and_pdf(user_profile["user_name"], output_path, graph_paths, API_KEYS["imgur"])
     if pdf_file_path:
         print(f"Final newsletter saved as PDF at: {pdf_file_path}")
+
 
 
 def process_user_portfolio(user_profile):
@@ -158,40 +189,44 @@ def process_user_portfolio(user_profile):
     """
     print(f"Processing portfolio for {user_profile['user_name']}...")
     stocks = user_profile["portfolio"]["stocks"]
+    all_graph_paths = []  # To collect graph paths for all stocks
 
     # Use ThreadPoolExecutor to process stocks in parallel
     with ThreadPoolExecutor() as executor:
-        futures = [
-            executor.submit(process_stock, stock["name"], stock["stock_code"], stock["sector"]) for stock in stocks
-        ]
+        futures = {
+            executor.submit(process_stock, stock["name"], stock["stock_code"], stock["sector"]): stock["name"]
+            for stock in stocks
+        }
         for future in futures:
             try:
-                future.result()
+                stock_graph_paths = future.result()  # Collect graph paths from `process_stock`
+                if stock_graph_paths:
+                    all_graph_paths.extend(stock_graph_paths)
             except Exception as e:
-                print(f"Error processing stock: {e}")
+                print(f"Error processing stock {futures[future]}: {e}")
 
-    # Generate the newsletter
-    generate_final_newsletter(user_profile)
+    # Generate the newsletter, passing all collected graph paths
+    generate_final_newsletter(user_profile, all_graph_paths)
+
 
 
 if __name__ == "__main__":
     # Example user profile
     user_profile = {
-        "user_name": "Diversified Investor",
-        "user_age": 35,
-        "user_email": "diversified_investor@example.com",
-        "portfolio_risk": "Medium",
+        "user_name": "Conservative Investor",
+        "user_age": 45,
+        "user_email": "conservative_investor@example.com",
+        "portfolio_risk": "Low",
         "portfolio": {
             "stocks": [
-                {"name": "Hindustan Unilever", "sector": "FMCG","stock_code": "500696", "market_cap": "LARGE_CAP"},
-                {"name": "ICICI Bank", "sector": "Banking","stock_code": "532174", "market_cap": "LARGE_CAP"},
-                {"name": "Bajaj Finance", "sector": "NBFC","stock_code": "500034", "market_cap": "LARGE_CAP"},
-                {"name": "Avenue Supermarts (DMart)", "sector": "Retail","stock_code": "540376", "market_cap": "MID_CAP"},
-                {"name": "Tata Power", "sector": "Utilities","stock_code": "500400", "market_cap": "MID_CAP"}
+                {"name": "Reliance Industries Ltd.", "sector": "Energy", "stock_code": "500325", "market_cap": "LARGE_CAP"},
+                {"name": "HDFC Bank", "sector": "Banking", "stock_code": "500180", "market_cap": "LARGE_CAP"},
+                {"name": "Infosys", "sector": "IT", "stock_code": "500209", "market_cap": "LARGE_CAP"},
+                {"name": "Asian Paints", "sector": "FMCG", "stock_code": "500820", "market_cap": "LARGE_CAP"}
             ],
             "mutual_funds": [
-                {"name": "Kotak Standard Multicap Fund", "type": "Equity", "focus": "MULTICAP"},
-                {"name": "Aditya Birla Sun Life Equity Hybrid 95 Fund", "type": "Hybrid", "focus": "BALANCED_RISK"}
+                {"name": "HDFC Balanced Advantage Fund", "type": "Hybrid", "focus": "BALANCED_RISK"},
+                {"name": "ICICI Prudential Bluechip Fund", "type": "Equity", "focus": "LARGE_CAP"}
             ]
         }
     }

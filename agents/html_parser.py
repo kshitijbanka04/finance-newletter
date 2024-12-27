@@ -1,3 +1,4 @@
+import os
 from openai import OpenAI
 
 class HTMLParserAgent:
@@ -7,25 +8,33 @@ class HTMLParserAgent:
     def __init__(self, api_key):
         self.api_key = api_key
 
-    def generate_html(self, text_content):
+    def generate_html(self, text_content, graph_urls):
         """
-        Converts text content into an HTML representation.
+        Converts text content into an HTML representation with graphs.
 
         Parameters:
         - text_content (str): The plain text content to convert.
+        - graph_urls (dict): A dictionary of graph titles and their public URLs.
 
         Returns:
         - str: Generated HTML content.
         """
-        prompt = f"""
+        # Prepare the graph references
+        graph_content = "\n".join([
+            f"### {os.path.splitext(title)[0].replace('_', ' ')}\n![Graph]({url})"
+            for title, url in graph_urls.items()
+        ])
 
-        NOTE: Do not summarize the text or do not skip business numbers wherever present.
-        
+        prompt = f"""
+        NOTE: Do not summarize the text or skip business numbers wherever present.
+
         You are an HTML designer. Convert the following plain text into a visually appealing HTML document. 
         Use proper headings, subheadings, bullet points, and make the content easy to read. 
         Add a basic inline CSS style to make it look clean and professional. Use appropriate semantic HTML tags. 
         Ensure links in the text are converted into clickable anchors.
-        Add graphics whereverer possible based on the data presented.
+
+        Add the following graphs in their relevant sections:
+        {graph_content}
 
         Here is the content:
         {text_content}

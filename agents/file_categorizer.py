@@ -23,7 +23,7 @@ class FileCategorizer:
             "Qualified Institutional Placement", "Preferential Issue", 
             "Investor Presentation", "Press Release / Media Release", 
             "Agreement", "Memorandum of Understanding / Agreements", 
-            "Update-Acquisition / Scheme / Sale / Disposal / Reg30", 
+            "Update-Acquisition / Scheme / Sale / Disposal / Reg30", "Newspaper Publication",
             "Restructuring", "Earnings Call Transcript", "Strategic Diversification / Disinvestment"
         ]
         corp_actions_subcategories = [

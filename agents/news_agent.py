@@ -13,6 +13,20 @@ class NewsAgent:
         self.fallback_api_key = fallback_api_key
         self.stock_news = []
         self.sector_news = []
+        self.news_stock_query = f"""
+            Fetch comprehensive news data for stock '{self.stock_name}':
+            - Quarterly revenue growth over the past year.
+            - Profit margins and their variations.
+            - Revenue contribution from different commodities or segments.
+            - Updates on investments, partnerships, and expansions.
+        """
+        self.sector_news_query = f"""
+            Fetch comprehensive news data for sector '{self.sector_name}':
+            - Sector-wide revenue trends and major contributors.
+            - Emerging market trends and challenges.
+            - Regulatory changes affecting the sector.
+            - Comparative data with key competitors.
+            """
 
     def fetch_from_tavily(self, query):
         """
@@ -92,10 +106,10 @@ class NewsAgent:
         Fetches stock-specific and sector-specific news.
         """
         print(f"Fetching recent news for stock: {self.stock_name}")
-        self.stock_news = self.fetch_news(self.stock_name)
+        self.stock_news = self.fetch_news(self.news_stock_query)
 
         if(self.sector_name.lower()!= "conglomerate"):
             print(f"Fetching recent news for sector {self.sector_name} and somewhat related to {self.stock_name}")
-            self.sector_news = self.fetch_news(self.sector_name)
+            self.sector_news = self.fetch_news(self.sector_news_query)
 
         return {"stock_news": self.stock_news, "sector_news": self.sector_news}
