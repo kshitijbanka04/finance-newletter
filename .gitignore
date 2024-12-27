@@ -56,3 +56,4 @@ coverage.xml
 *.coveragerc
 
 .history/
+.env
